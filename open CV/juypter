@@ -1,0 +1,26 @@
+import cv2 as cv
+import pandas as pd
+import numpy as np
+import matplotlib.pyplot as plt
+
+
+data = pd.read_csv('iris.csv')
+
+# print(data)
+
+img1 = data['petal.length'].plot()
+img2 = data['sepal.length'].plot()
+tittles = ['sobelx', 'sobely']
+images = [img1, img2]
+
+for i in range(2):
+    plt.subplot(1,2,(i+1)), plt.imshow(images[i])
+    plt.title(tittles[i])
+    plt.xticks([]), plt.yticks([])
+    
+plt.show()
+cv.destroyAllWindows()
+
+# iris_feat = iris.iloc[:, :-1]
+
+# plt.scatter(x= iris_feat['sepal.length'], y= [iris_feat['petal.leangth']], alpha= )

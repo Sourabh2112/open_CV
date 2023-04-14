@@ -1,0 +1,23 @@
+import cv2
+import numpy as np
+
+img = cv2.imread('opticalfb.jpg', 1)
+img2 = cv2.imread('graf1.png')
+
+print(img.shape)
+print(img.size)
+print(img.dtype)
+
+# b,g,r = cv2.split(img)
+# img = cv2.merge(b,g,r)
+
+cpy = img[162:74, 194:115]
+img[291:37, 313:78] = cpy
+
+# img = cv2.resize(img, (512,512))
+# img2 = cv2.resize(img2, (512,512))
+
+# com = cv2.addWeighted(img, 0.9, img2, 0.1, 0)
+cv2.imshow('image',img)
+cv2.waitKey(0)
+cv2.destroyAllWindows

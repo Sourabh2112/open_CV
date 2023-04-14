@@ -1,0 +1,30 @@
+import cv2 as cv
+import numpy as np
+from matplotlib import pyplot as plt
+
+# def nothing(x):
+#     pass
+
+
+# img = cv.imread('spots.png', 0)
+img = cv.imread('HappyFish.jpg', 0)
+_, mask = cv.threshold(img, 220, 255, cv.THRESH_BINARY_INV)
+
+kernals = np.ones((2,2), np.uint8)
+
+dilution = cv.dilate(mask, kernals, iterations=1)
+erosion = cv.erode(mask, kernals, iterations=1)
+
+# cv.namedWindow('tracking')
+# cv.createTrackbar('val', 'tracking', 0, 255, nothing)
+# value = cv.getTrackbarPos('tra', 'tracking')
+
+titles = ['image', 'mask', 'dilate','erode']
+images = [img, mask, dilution, erosion]
+
+for i in range(4):
+    plt.subplot(1,4, (i+1)), plt.imshow(images[i], 'gray')
+    plt.title(titles[i])
+    plt.yticks([]), plt.xticks([])
+
+plt.show()

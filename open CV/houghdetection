@@ -1,0 +1,31 @@
+import cv2
+import numpy as np
+
+cv2.namedWindow("tracking")
+def nothing(x):
+    pass
+
+cv2.createTrackbar("LV", "tracking", 0, 255, nothing )
+cv2.createTrackbar("UV", "tracking", 0, 255, nothing )
+
+img = cv2.imread('roadlane1.jpg')
+gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
+
+
+while(True):
+    lv = cv2.getTrackbarPos("LV","tracking")
+    uv = cv2.getTrackbarPos("UV","tracking")
+    edges = cv2.Canny(gray, lv,uv, apertureSize=3)
+    cv2.imshow('edge', edges)
+    if cv2.waitKey(1) & 0xFF == ord('q'):
+        break
+
+# lines = cv2.HoughLinesP(edges, 1,np.pi/180,200, minLineLength=100, maxLineGap=10 )
+# for line in lines:
+#     x1,y1,x2,y2= line[0]
+#     cv2.line(img, (x1,y1), (x2,y2), (0,0,255), 2)
+
+# cv2.imshow('image', edges)
+
+cv2.waitKey(0)
+cv2.destroyAllWindows
